@@ -17,7 +17,26 @@ namespace AM1.ApplicationCore.Domain
         public int Id { get; set; }
         public string EmailAddress { get; set; }
 
-        public IList<Flight> Flights { get; set; }
+        public ICollection<Flight> Flights { get; set; }
+
+        //public Boolean CheckProfile(string FirstName,string LastName)
+        //{
+        //    return (this.FirstName.Equals(FirstName) && this.LastName.Equals(LastName));      
+        //}
+        public Boolean CheckProfile(string FirstName, string LastName, string email=null)
+        {
+            if(email == null) 
+            return (this.FirstName.Equals(FirstName) && this.LastName.Equals(LastName));
+            else
+                return (this.FirstName.Equals(FirstName) && this.LastName.Equals(LastName) && EmailAddress.Equals(email));
+
+
+        }
+        //Virtual = redefinissable dans la classe fille
+        public virtual void PassengerType()
+        {
+            Console.WriteLine("I am a passenger");
+        }
 
 
 

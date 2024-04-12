@@ -26,7 +26,11 @@ namespace AM1.ApplicationCore.Domain
         public string Departure { get; set; }
         public string Destination { get; set;}
         //prop de navigation: propriete qui modelise une relation entre 2 entité(sont des listes et des objets)
-        public IList<Passenger> Passengers { get; set; }
+        public ICollection<Passenger> Passengers { get; set; }
         public Plane Plane { get; set; }
+        public override string ToString()
+        {
+            return "Destination: "+Destination+" Date: "+FlightDate+" Duree: "+EstimatedDuration;
+        }
     }
 }

@@ -10,6 +10,12 @@ namespace AM1.ApplicationCore.Domain
     {
         public DateTime EmployementDate { get; set; }
         public double Salary { get; set; }
-        public string Function { get; set; }    
+        public string Function { get; set; }
+
+        public override void PassengerType()
+        {
+            base.PassengerType();
+            Console.WriteLine(" I am a Staff Member");
+        }
     }
 }

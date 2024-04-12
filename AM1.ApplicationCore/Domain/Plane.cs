@@ -35,10 +35,11 @@ namespace AM1.ApplicationCore.Domain
         public int Capacity { get; set; }
         public DateTime ManufactureDate { get; set; }
         public PlaneType PlaneType { get; set; }
-        public IList<Flight> Flights { get; set; }
+        public ICollection<Flight> Flights { get; set; }
         public override string ToString()
         {
-            return "Capacity: " + Capacity+" PlaneType "+PlaneType;
+            return "Capacity: " + Capacity+" PlaneType: "+PlaneType +
+                " PlaneID: " + PlaneId + " ManufactureDate: " + ManufactureDate;
         }
 
     }
