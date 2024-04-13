@@ -45,11 +45,50 @@ p1.PassengerType();
 s1.PassengerType();
 t1.PassengerType();
 #endregion
-Console.WriteLine("*********GetFlightDates*********");
+
 #region Tester FlightDates
+Console.WriteLine("*********GetFlightDates*********");
+
 FlightMethods fm =new FlightMethods();
 fm.Flights = TestData.listFlights;
-fm.GetFlightDates("Madrid");
+foreach(DateTime d in fm.GetFlightDates("Paris"))
+    Console.WriteLine(d);
 #endregion
+
+#region Tester Flights
 Console.WriteLine("*********GetFlights*********");
+
 fm.GetFlights("EstimatedDuration", "105");
+#endregion
+
+#region Tester ShowFlightDetails
+Console.WriteLine("*********ShowFlightDetails*********");
+fm.ShowFlightDetails(TestData.Airbusplane);
+#endregion
+
+#region Tester ProgrammedFlightNumber
+Console.WriteLine("**********ProgrammedFlightNumber********");
+Console.WriteLine(fm.ProgrammedFlightNumber(new DateTime(2021,12,31)));
+#endregion
+
+#region Tester DurationAverage
+Console.WriteLine("**********DurationAverage********");
+Console.WriteLine(fm.DurationAverage("Madrid"));
+#endregion
+
+#region Tester OrderedDurationFlights
+Console.WriteLine("**********OrderedDurationFlights********");
+foreach(Flight fl in fm.OrderedDurationFlights())
+    Console.WriteLine(fl.EstimatedDuration);
+#endregion
+
+#region Tester SeniorTravellers
+Console.WriteLine("**********SeniorTravellers********");
+foreach(Traveller t in fm.SeniorTravellers(TestData.flight1))
+    Console.WriteLine(t.BirthDate);
+#endregion
+
+#region Tester DestinationGroupedFlight
+Console.WriteLine("**********DestinationGroupedFlight********");
+fm.DestinationGroupedFlight();
+#endregion
