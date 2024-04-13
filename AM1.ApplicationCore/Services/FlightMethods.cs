@@ -3,19 +3,45 @@ using AM1.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Plane = AM1.ApplicationCore.Domain.Plane;
 
 namespace AM1.ApplicationCore.Services
 {
     public class FlightMethods :IFlightMethods
     {
         public List<Flight> Flights { get; set; } = new List<Flight>();
+        //Action pour des methodes qui retourne void ,Flight c'est ce qu'il prend en parametre (on peux avoir plusieurs types de parametre)
+        public Action<Plane> FlightDetailsDel;
+        //Func pour des methodes qui ont un type de retour, double c'est le type de retour, string c'est ce qu'il prend en parametre(on peux avoir plusieurs types de parametre)
+        public Func<string, double> DurationAverageDel;
+        public FlightMethods() {
+            //FlightDetailsDel = ShowFlightDetails;
+            //DurationAverageDel = DurationAverage;
+            // expression lamda: (1) =>{(2)}: dans la partie 1 on met le nom des parametres exp(pl,i) et dans la partie 2 le comportement de la methode
+            FlightDetailsDel= pl=> {
+                var req = from f in Flights
+                          where f.Plane == pl
+                          select new { f.Destination, f.FlightDate };
+                foreach (var f in req)
+                    Console.WriteLine(f);
+            };
+            DurationAverageDel = destination => {
+                var req = from f in Flights
+                          where f.Destination == destination
+                          select f.EstimatedDuration;
+                return req.Average();
+            };
+        }
 
         public IEnumerable<IGrouping<string, Flight>> DestinationGroupedFlight()
         {
             var req= from f in Flights
                      group f by f.Destination;
+            //reecriture de la requete avec la lambda expression
+            var req2 = Flights.GroupBy(f => f.Destination);
             foreach (var g in req)
             {
                 Console.WriteLine(g.Key);

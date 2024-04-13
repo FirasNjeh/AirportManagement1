@@ -30,8 +30,8 @@ Console.WriteLine(f3);
 #region Tester CheckProfile
 Passenger p1 = new Passenger
 {
-    FirstName = "Firas",
-    LastName = "Njah",
+    FirstName = "firas",
+    LastName = "njah",
     EmailAddress = "firas.njeh@esprit.tn"
 };
 Console.WriteLine(p1.CheckProfile("Firas", "Njah"));
@@ -64,6 +64,9 @@ fm.GetFlights("EstimatedDuration", "105");
 #region Tester ShowFlightDetails
 Console.WriteLine("*********ShowFlightDetails*********");
 fm.ShowFlightDetails(TestData.Airbusplane);
+//appel avec le delégué
+fm.FlightDetailsDel(TestData.Airbusplane);
+
 #endregion
 
 #region Tester ProgrammedFlightNumber
@@ -74,6 +77,9 @@ Console.WriteLine(fm.ProgrammedFlightNumber(new DateTime(2021,12,31)));
 #region Tester DurationAverage
 Console.WriteLine("**********DurationAverage********");
 Console.WriteLine(fm.DurationAverage("Madrid"));
+//appel avec le delégué
+Console.WriteLine(fm.DurationAverageDel("Madrid"));
+
 #endregion
 
 #region Tester OrderedDurationFlights
@@ -91,4 +97,10 @@ foreach(Traveller t in fm.SeniorTravellers(TestData.flight1))
 #region Tester DestinationGroupedFlight
 Console.WriteLine("**********DestinationGroupedFlight********");
 fm.DestinationGroupedFlight();
+#endregion
+
+#region Tester UpperFullName
+Console.WriteLine("**********UpperFullName********");
+p1.UpperFullName();
+Console.WriteLine(p1.FirstName+" "+p1.LastName);
 #endregion
