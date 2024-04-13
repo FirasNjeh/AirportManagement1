@@ -25,6 +25,7 @@ namespace AM1.ApplicationCore.Domain
         public DateTime EffectiveArrival { get; set; }
         public string Departure { get; set; }
         public string Destination { get; set;}
+        public string AirlineLogo { get; set; }
         //prop de navigation: propriete qui modelise une relation entre 2 entité(sont des listes et des objets)
         public ICollection<Passenger> Passengers { get; set; }
         public Plane Plane { get; set; }
