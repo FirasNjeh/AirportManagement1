@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using AM.Infrastructure;
 using AM1.ApplicationCore.Domain;
 using AM1.ApplicationCore.Services;
 
@@ -30,8 +31,11 @@ Console.WriteLine(f3);
 #region Tester CheckProfile
 Passenger p1 = new Passenger
 {
-    FirstName = "firas",
-    LastName = "njah",
+    FullName = new FullName
+    {
+        FirstName = "firas",
+        LastName = "njah",
+    },
     EmailAddress = "firas.njeh@esprit.tn"
 };
 Console.WriteLine(p1.CheckProfile("Firas", "Njah"));
@@ -89,9 +93,9 @@ foreach(Flight fl in fm.OrderedDurationFlights())
 #endregion
 
 #region Tester SeniorTravellers
-Console.WriteLine("**********SeniorTravellers********");
-foreach(Traveller t in fm.SeniorTravellers(TestData.flight1))
-    Console.WriteLine(t.BirthDate);
+//Console.WriteLine("**********SeniorTravellers********");
+//foreach(Traveller t in fm.SeniorTravellers(TestData.flight1))
+//    Console.WriteLine(t.BirthDate);
 #endregion
 
 #region Tester DestinationGroupedFlight
@@ -102,5 +106,24 @@ fm.DestinationGroupedFlight();
 #region Tester UpperFullName
 Console.WriteLine("**********UpperFullName********");
 p1.UpperFullName();
-Console.WriteLine(p1.FirstName+" "+p1.LastName);
+Console.WriteLine(p1.FullName.FirstName + " "+p1.FullName.LastName);
+#endregion
+
+#region Insertion dans la base de données
+AMContext ctx= new AMContext();
+//ctx.Planes.Add(TestData.Airbusplane);
+//ctx.Planes.Add(TestData.BoingPlane);
+//ctx.Flights.Add(TestData.flight1);
+//ctx.Flights.Add(TestData.flight2);
+//ctx.SaveChanges();
+Console.WriteLine("Ajout avec succes");
+
+
+#endregion
+
+#region Afficher le contenu de la table Flights
+foreach(Flight fl in ctx.Flights)
+    Console.WriteLine("Date: "+fl.FlightDate+" Destination: "+fl.Destination+ " Plane Capacity: "+fl.Plane.Capacity);
+
+
 #endregion

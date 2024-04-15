@@ -146,16 +146,16 @@ namespace AM1.ApplicationCore.Services
                      ;
         }
 
-        public IEnumerable<Traveller> SeniorTravellers(Flight flight)
-        {
-            var req = from t in flight.Passengers.OfType<Traveller>()
-                      orderby t.BirthDate
-                      select t;
-            //recuperer les 3 premieres occurences
-            return req.Take(3);
-            //Skip (3) pour ignorer les 3 premieres occruences
-                      ;
-        }
+        //public IEnumerable<Traveller> SeniorTravellers(Flight flight)
+        //{
+        //    var req = from t in flight.Passengers.OfType<Traveller>()
+        //              orderby t.BirthDate
+        //              select t;
+        //    //recuperer les 3 premieres occurences
+        //    return req.Take(3);
+        //    //Skip (3) pour ignorer les 3 premieres occruences
+        //              ;
+        //}
 
         public void ShowFlightDetails(Plane plane)
         {
