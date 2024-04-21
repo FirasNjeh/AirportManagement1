@@ -2,6 +2,7 @@
 
 using AM.Infrastructure;
 using AM1.ApplicationCore.Domain;
+using AM1.ApplicationCore.Interfaces;
 using AM1.ApplicationCore.Services;
 
 Console.WriteLine("Hello, World!");
@@ -111,18 +112,26 @@ Console.WriteLine(p1.FullName.FirstName + " "+p1.FullName.LastName);
 
 #region Insertion dans la base de données
 AMContext ctx= new AMContext();
-//ctx.Planes.Add(TestData.Airbusplane);
+IUnitOfWork uow= new UnitOfWork(ctx);
+IServicePlane sp = new ServicePlane(uow);
+IServiceFlight sf = new ServiceFlight(uow);
+sp.Add(TestData.Airbusplane);
+sf.Add(TestData.flight1);
+//ctx.Set<Plane>().Add(TestData.Airbusplane);
 //ctx.Planes.Add(TestData.BoingPlane);
 //ctx.Flights.Add(TestData.flight1);
 //ctx.Flights.Add(TestData.flight2);
 //ctx.SaveChanges();
+//commit enregistre TOUS(dans notre exp il va enregistrer le flight et le plane ) les changemets sur la base de données 
+sf.Commit();//ou sp.Commit(); c'est la meme
 Console.WriteLine("Ajout avec succes");
 
 
 #endregion
 
 #region Afficher le contenu de la table Flights
-foreach(Flight fl in ctx.Flights)
+//foreach(Flight fl in ctx.Flights)
+foreach (Flight fl in sf.GetMany())
     Console.WriteLine("Date: "+fl.FlightDate+" Destination: "+fl.Destination+ " Plane Capacity: "+fl.Plane.Capacity);
 
 
