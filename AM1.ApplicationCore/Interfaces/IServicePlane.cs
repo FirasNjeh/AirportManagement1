@@ -9,7 +9,12 @@ namespace AM1.ApplicationCore.Interfaces
 {
     public interface IServicePlane:IService<Plane>
     {
-       
+        IEnumerable<Traveller> GetPassengers(Plane p);
+        IEnumerable<Flight> GetFlights(int n);
+        Boolean IsAvailablePlane(Flight f,int n);
+        void DeletePlanes();
+
+
     }
 }
     
